@@ -8,4 +8,4 @@ install:
   - pipenv install --dev
 
 script:
-  - main.py
+  - python main.py test
