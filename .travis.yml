@@ -1,0 +1,21 @@
+language: python
+python:
+  - 2.7
+install:
+  - pip install -U pip
+
+script:
+  - bandit ./*
+  - bandit -s B101 -ll -f screen main.py
+  - black -t py27 --check .
+  - mypy --python-version 3.8 --strict main.py
+  - pylint main.py
+  - radon cc mi raw main.py -na
+  - pycodestyle  --show-source --statistics main.py
+  - eradicate  main.py
+  - pyflakes main.py
+  - python3 -m doctest -v main.py
+  - vulture main.py
+  - coverage erase
+  - coverage run --branch main.py
+  - coverage report -m main.py
